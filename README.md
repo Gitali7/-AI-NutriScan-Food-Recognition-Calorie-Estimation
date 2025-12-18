@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🍽️ AI NutriScan: Food Recognition & Calorie Estimation
 
 A fast, lightweight AI system that identifies food items from images and estimates their calorie content using Transfer Learning with MobileNetV2.
@@ -77,7 +76,3 @@ Go to your browser and open: **http://127.0.0.1:5000**
 
 ---
 *Created for Final Year CSV Project.*
-=======
-# -AI-NutriScan-Food-Recognition-Calorie-Estimation
-A fast, lightweight AI system that identifies food items from images and estimates their calorie content using Transfer Learning with MobileNetV2.
->>>>>>> a896b1f64c23c60d5f1388ef353fd38a24fba6fa

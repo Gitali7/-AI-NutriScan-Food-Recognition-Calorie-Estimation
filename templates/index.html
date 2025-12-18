@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Food Calorie Estimator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🍽️ AI NutriScan</h1>
+            <p>Instant Food Recognition & Calorie Estimation</p>
+        </header>
+
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <div class="upload-box" id="drop-area">
+                <input type="file" id="fileElem" accept="image/*" onchange="handleFiles(this.files)">
+                <label class="button" for="fileElem">Choose an Image</label>
+                <p>or drag and drop here</p>
+                <img id="preview" src="" alt="Image Preview" style="display:none;">
+            </div>
+
+            <button id="predict-btn" class="primary-btn" onclick="uploadAndPredict()" style="display:none;">Analyze
+                Food</button>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loading" class="loading-spinner" style="display:none;">
+            <div class="spinner"></div>
+            <p>Analyzing...</p>
+        </div>
+
+        <!-- Result Section -->
+        <div id="result-section" class="result-card" style="display:none;">
+            <h2>Analysis Result</h2>
+            <div class="result-grid">
+                <div class="result-item">
+                    <span class="label">Detected Food</span>
+                    <span class="value" id="food-name">--</span>
+                </div>
+                <div class="result-item">
+                    <span class="label">Estimated Calories</span>
+                    <span class="value highlight" id="calorie-count">--</span>
+                    <span class="unit">kcal / serving</span>
+                </div>
+                <div class="result-item">
+                    <span class="label">Confidence</span>
+                    <span class="value" id="confidence-score">--</span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+        let selectedFile = null;
+
+        function handleFiles(files) {
+            if (files.length > 0) {
+                selectedFile = files[0];
+                const preview = document.getElementById('preview');
+                preview.src = URL.createObjectURL(selectedFile);
+                preview.style.display = 'block';
+                document.getElementById('predict-btn').style.display = 'block';
+                document.getElementById('result-section').style.display = 'none';
+            }
+        }
+
+        async function uploadAndPredict() {
+            if (!selectedFile) return;
+
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+
+            // Show loading
+            document.getElementById('loading').style.display = 'flex';
+            document.getElementById('result-section').style.display = 'none';
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                // Hide loading
+                document.getElementById('loading').style.display = 'none';
+
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                } else {
+                    document.getElementById('food-name').textContent = data.label;
+                    document.getElementById('calorie-count').textContent = data.calories;
+                    document.getElementById('confidence-score').textContent = data.confidence;
+                    document.getElementById('result-section').style.display = 'block';
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('loading').style.display = 'none';
+                alert('Something went wrong!');
+            }
+        }
+    </script>
+
+</body>
+
+</html>

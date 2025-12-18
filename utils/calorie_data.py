@@ -1,0 +1,126 @@
+# Static Calorie Dictionary
+# Mapping ImageNet class labels (or custom mapped labels) and all 80 Indian Food Classes.
+
+calorie_info = {
+    # Generic / ImageNet
+    "burger": 295,
+    "cheeseburger": 303,
+    "hot_dog": 290,
+    "pizza": 266,
+    "ice_cream": 207,
+    "bagel": 250,
+    "pretzel": 380,
+    "mashed_potato": 88,
+    "cauliflower": 25,
+    "broccoli": 34,
+    "cucumber": 15,
+    "granny_smith": 52,
+    "strawberry": 33,
+    "orange": 47,
+    "lemon": 29,
+    "banana": 89,
+    "pomegranate": 83,
+    "meat_loaf": 149,
+    "burrito": 206,
+    "espresso": 9,
+    "chocolate_sauce": 441,
+    "carbonara": 370,
+    "spaghetti_bolognese": 297,
+
+    # Complete 80 Indian Food Dataset
+    "adhirasam": 300,
+    "aloo_gobi": 150,
+    "aloo_matar": 170,
+    "aloo_methi": 160,
+    "aloo_shimla_mirch": 180,
+    "aloo_tikki": 280,
+    "anarsa": 300,
+    "ariselu": 320,
+    "bandar_laddu": 250,
+    "basundi": 350,
+    "bhatura": 220,
+    "bhindi_masala": 130,
+    "biryani": 250,
+    "boondi": 230,
+    "butter_chicken": 400,
+    "chak_hao_kheer": 320,
+    "cham_cham": 175,
+    "chana_masala": 160,
+    "chapati": 70,
+    "chhena_kheeri": 200,
+    "chicken_razala": 350,
+    "chicken_tikka": 320,
+    "chicken_tikka_masala": 380,
+    "chikki": 120,
+    "daal_baati_churma": 450,
+    "daal_puri": 200,
+    "dal_makhani": 280,
+    "dal_tadka": 220,
+    "dharwad_pedha": 150,
+    "doodhpak": 310,
+    "double_ka_meetha": 400,
+    "dum_aloo": 220,
+    "gajar_ka_halwa": 300,
+    "gavvalu": 150,
+    "ghevar": 400,
+    "gulab_jamun": 150,
+    "imarti": 300,
+    "jalebi": 150,
+    "kachori": 190,
+    "kadai_paneer": 320,
+    "kadhi_pakoda": 250,
+    "kajjikaya": 220,
+    "kakinada_khaja": 300,
+    "kalakand": 200,
+    "karela_bharta": 120,
+    "kofta": 200,
+    "kuzhi_paniyaram": 180,
+    "lassi": 150,
+    "ledikeni": 180,
+    "litti_chokha": 280,
+    "lyangcha": 300,
+    "maach_jhol": 250,
+    "makki_di_roti_sarson_da_saag": 450,
+    "malapua": 320,
+    "misi_roti": 150,
+    "misti_doi": 180,
+    "modak": 200,
+    "mysore_pak": 300,
+    "naan": 260,
+    "navrattan_korma": 300,
+    "palak_paneer": 240,
+    "paneer_butter_masala": 350,
+    "phirni": 180,
+    "pithe": 120,
+    "poha": 180,
+    "poornalu": 150,
+    "pootharekulu": 200,
+    "qubani_ka_meetha": 200,
+    "rabri": 350,
+    "ras_malai": 250,
+    "rasgulla": 120,
+    "sandesh": 140,
+    "shankarpali": 150,
+    "sheer_korma": 300,
+    "sheera": 320,
+    "shrikhand": 280,
+    "sohan_halwa": 350,
+    "sohan_papdi": 280,
+    "sutar_feni": 150,
+    "unni_appam": 180
+}
+
+def get_calorie_info(food_label):
+    # Normalize label
+    label_key = food_label.lower().replace(" ", "_")
+    
+    # Try exact match
+    if label_key in calorie_info:
+        return calorie_info[label_key]
+    
+    # Try partial match
+    for key in calorie_info:
+        if key in label_key:
+            return calorie_info[key]
+            
+    return None

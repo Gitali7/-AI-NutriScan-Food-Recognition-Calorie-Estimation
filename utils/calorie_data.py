@@ -27,6 +27,16 @@ calorie_info = {
     "carbonara": 370,
     "spaghetti_bolognese": 297,
 
+    # Common Foreign/Fast Foods added via Hybrid Support
+    "french_fries": 312,
+    "taco": 226,
+    "fried_chicken": 320,
+    "sandwich": 250,
+    "donuts": 452,
+    "popcorn": 375,
+    "coke": 140,
+    "soda": 140,
+
     # Complete 80 Indian Food Dataset
     "adhirasam": 300,
     "aloo_gobi": 150,
